@@ -50,6 +50,7 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        if (true) return;
         SystemUsers users = usersService.findByUserPhoneNumber("09124850689");
         if (users == null) {
             usersService.addUser(new SystemUsers("Mohamad", "09124850689"));

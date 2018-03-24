@@ -79,7 +79,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.pelak.backend.PelackBackendApplication</mainClass>
+                            <mainClass>com.viracam.backend.ViraCamBackendApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * Created by Mohammad on 1/17/2018.
@@ -29,6 +30,8 @@ public class ProductOrder implements Serializable {
     Category orderStatus;
     @ManyToOne
     UserOrder userOrder;
+    int qty;
+    BigDecimal totalPrice;
 
 
     @JsonCreator
@@ -38,7 +41,9 @@ public class ProductOrder implements Serializable {
                         @JsonProperty("orderDate")String orderDate,
                         @JsonProperty("orderTime")String orderTime,
                         @JsonProperty("orderStatus")Category orderStatus,
-                        @JsonProperty("userOrder")UserOrder userOrder) {
+                        @JsonProperty("userOrder")UserOrder userOrder,
+                        @JsonProperty("qty")int qty,
+                        @JsonProperty("totalPrice")BigDecimal totalPrice) {
         this.id = id;
         this.product = product;
         this.user = user;
@@ -46,18 +51,38 @@ public class ProductOrder implements Serializable {
         this.orderTime = orderTime;
         this.orderStatus = orderStatus;
         this.userOrder = userOrder;
+        this.qty = qty;
+        this.totalPrice = totalPrice;
     }
 
-    public ProductOrder(Product product, SystemUsers user, String orderDate, String orderTime, Category orderStatus,UserOrder userOrder) {
+    public ProductOrder(Product product, SystemUsers user, String orderDate, String orderTime, Category orderStatus,UserOrder userOrder,int qty,BigDecimal totalPrice) {
         this.product = product;
         this.user = user;
         this.orderDate = orderDate;
         this.orderTime = orderTime;
         this.orderStatus = orderStatus;
         this.userOrder = userOrder;
+        this.qty = qty;
+        this.totalPrice = totalPrice;
     }
 
     public ProductOrder() {
+    }
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public UserOrder getUserOrder() {

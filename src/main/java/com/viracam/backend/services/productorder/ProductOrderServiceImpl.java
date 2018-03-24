@@ -12,6 +12,7 @@ import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -37,7 +38,7 @@ public class ProductOrderServiceImpl implements ProductOrdersService {
     public ProductOrder registerNewOrder(long productId, String userPhoneNumber) {
         SystemUsers user = systemUsersRepository.findByUserPhoneNumber(userPhoneNumber);
         Product product = productRepository.findOne(productId);
-        ProductOrder order = new ProductOrder(product, user, "", "", categoryRepository.findByCode("START_ORDER"), new UserOrder());
+        ProductOrder order = new ProductOrder(product, user, "", "", categoryRepository.findByCode("START_ORDER"), new UserOrder(), 0,BigDecimal.ZERO);
         return productOrderRepository.save(order);
     }
 
