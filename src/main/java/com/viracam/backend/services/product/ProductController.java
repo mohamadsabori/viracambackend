@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,7 +43,7 @@ public class ProductController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public Product addProductPost(@RequestBody Product product) {
-        return service.addProduct(product);
+        return service.addProductWithoutImages(product);
     }
 
     @RequestMapping(value = "/add/image", method = RequestMethod.POST)
@@ -50,21 +51,26 @@ public class ProductController {
     public ResponseEntity upload(@RequestParam("id") long productId, HttpServletResponse response, HttpServletRequest request) {
         try {
             Product product = service.findOne(productId);
+            StandardMultipartHttpServletRequest request1 = (StandardMultipartHttpServletRequest) request;
             MultipartHttpServletRequest multipart = (MultipartHttpServletRequest) request;
-            Iterator<String> it = multipart.getFileNames();
-            MultipartFile files = multipart.getFile(it.next());
-            String fileName = productId + ".png";
-            byte[] bytes = files.getBytes();
-            service.store(files, product.getId());
+            while (multipart.getFileNames().hasNext()){
+                Iterator<String> it = multipart.getFileNames();
+                MultipartFile files = multipart.getFile(it.next());
+                String fileName = productId + ".png";
+                byte[] bytes = files.getBytes();
+                service.store(files, product.getId());
             /*BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("/src/main/resources/static/images/product" + fileName)));
             stream.write(bytes);
             stream.close();*/
-            // Saving to data base
-            ProductImages productImage = new ProductImages(bytes, product.getId() + "/" + files.getOriginalFilename());
-            productImage = imagesSevice.add(productImage);
-            product.getProductImages().add(productImage);
-            service.updateProduct(product);
-            return new ResponseEntity("Upload success!", HttpStatus.OK);
+                // Saving to data base
+                ProductImages productImage = new ProductImages(bytes, product.getId() + "/" + files.getOriginalFilename());
+                productImage = imagesSevice.add(productImage);
+                product.getProductImages().add(productImage);
+                service.updateProduct(product);
+                return new ResponseEntity("Upload success!", HttpStatus.OK);
+            }
+            return new ResponseEntity("No File to upload!", HttpStatus.OK);
+
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity("upload failed!", HttpStatus.BAD_REQUEST);

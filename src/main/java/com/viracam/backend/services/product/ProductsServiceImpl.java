@@ -45,11 +45,11 @@ public class ProductsServiceImpl implements ProductsService {
         for (Product product : products) {
             Product product1 = product;
 
-            for (ProductImages productImage : product1.getProductImages()) {
+            /*for (ProductImages productImage : product1.getProductImages()) {
                 ProductImages images = new ProductImages();
                 images.setFilename(productImage.getFilename());
                 product1.getProductImages().add(images);
-            }
+            }*/
 
             list.add(product1);        }
         return list;
@@ -158,5 +158,16 @@ public class ProductsServiceImpl implements ProductsService {
     @Override
     public Product updateProduct(Product newProduct){
         return repository.save(newProduct);
+    }
+
+    @Override
+    public Product addProductWithoutImages(Product product) {
+        product.setProductImages(null);
+        Set<ProductProperties> properties = new HashSet<ProductProperties>();
+        for (ProductProperties productProperties : product.getProductProperties()) {
+            properties.add(propertiesRepository.save(productProperties));
+        }
+        product.setProductProperties(properties);
+        return addProduct(product);
     }
 }

@@ -31,4 +31,6 @@ public interface ProductsService {
     ArrayList<ProductDTO> loadAllProductsForClient();
     Iterable<ShippingMethod> loadAllshippingMethods();
     Product updateProduct(Product newProduct);
+
+    Product addProductWithoutImages(Product product);
 }
