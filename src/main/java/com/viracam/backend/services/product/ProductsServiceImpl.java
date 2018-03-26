@@ -170,4 +170,9 @@ public class ProductsServiceImpl implements ProductsService {
         product.setProductProperties(properties);
         return addProduct(product);
     }
+
+    @Override
+    public Product loadProductById(long productId) {
+        return repository.findOne(productId);
+    }
 }

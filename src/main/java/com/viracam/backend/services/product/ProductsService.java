@@ -33,4 +33,6 @@ public interface ProductsService {
     Product updateProduct(Product newProduct);
 
     Product addProductWithoutImages(Product product);
+
+    Product loadProductById(long productId);
 }

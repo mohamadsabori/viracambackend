@@ -95,8 +95,8 @@ public class ProductController {
     }
 
     @RequestMapping(path = "loadProductById", method = RequestMethod.GET)
-    public ProductDTO loadProductById(@RequestParam("id") long productId) {
-        return service.loadProduct(productId);
+    public Product loadProductById(@RequestParam("id") long productId) {
+        return service.loadProductById(productId);
     }
 
     @RequestMapping(path = "loadAllProductTypes", method = RequestMethod.GET)

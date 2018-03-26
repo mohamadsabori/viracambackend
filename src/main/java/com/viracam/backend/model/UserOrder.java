@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Set;
 
 /**
@@ -25,6 +26,8 @@ public class UserOrder implements Serializable {
     private String userAddress;
     @ManyToOne
     private ShippingMethod shippingMethod;
+    @Column(name = "C_TOTALFACTOR")
+    BigDecimal totalFactor;
 
     @JsonCreator
     public UserOrder(@JsonProperty("id")long id
@@ -32,16 +35,26 @@ public class UserOrder implements Serializable {
             ,@JsonProperty("userFullName") String userFullName
             ,@JsonProperty("userPhoneNumber") String userPhoneNumber
             ,@JsonProperty("userAddress") String userAddress
-            ,@JsonProperty("shippingMethod") ShippingMethod shippingMethod) {
+            ,@JsonProperty("shippingMethod") ShippingMethod shippingMethod
+            ,@JsonProperty("totalFactor")BigDecimal totalFactor) {
         this.id = id;
         this.orderset = orderset;
         this.userFullName = userFullName;
         this.userPhoneNumber = userPhoneNumber;
         this.userAddress = userAddress;
         this.shippingMethod = shippingMethod;
+        this.totalFactor = totalFactor;
     }
 
     public UserOrder() {
+    }
+
+    public BigDecimal getTotalFactor() {
+        return totalFactor;
+    }
+
+    public void setTotalFactor(BigDecimal totalFactor) {
+        this.totalFactor = totalFactor;
     }
 
     public long getId() {
