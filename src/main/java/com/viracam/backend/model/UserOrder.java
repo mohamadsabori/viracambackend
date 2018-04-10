@@ -28,6 +28,18 @@ public class UserOrder implements Serializable {
     private ShippingMethod shippingMethod;
     @Column(name = "C_TOTALFACTOR")
     BigDecimal totalFactor;
+    @Column(name = "C_ORDERDATE")
+    String orderDate;
+    @Column(name = "C_ORDERTIME")
+    String orderTime;
+    @Column(name = "C_ORDERSERIAL")
+    String orderSerial;
+    @Column(name = "C_SHIPPINGMETHODDETAILS")
+    String shippingMethodDetails;
+    @OneToOne
+//    @Column(name = "C_ORDERSTATUS")
+    Category orderStatus;
+
 
     @JsonCreator
     public UserOrder(@JsonProperty("id")long id
@@ -36,7 +48,12 @@ public class UserOrder implements Serializable {
             ,@JsonProperty("userPhoneNumber") String userPhoneNumber
             ,@JsonProperty("userAddress") String userAddress
             ,@JsonProperty("shippingMethod") ShippingMethod shippingMethod
-            ,@JsonProperty("totalFactor")BigDecimal totalFactor) {
+            ,@JsonProperty("totalFactor")BigDecimal totalFactor
+            ,@JsonProperty("orderDate")String orderDate
+            ,@JsonProperty("orderTime")String orderTime
+            ,@JsonProperty("orderStatus")Category orderStatus
+            ,@JsonProperty("orderSerial")String orderSerial
+            ,@JsonProperty("shippingMethodDetails")String shippingMethodDetails) {
         this.id = id;
         this.orderset = orderset;
         this.userFullName = userFullName;
@@ -44,6 +61,51 @@ public class UserOrder implements Serializable {
         this.userAddress = userAddress;
         this.shippingMethod = shippingMethod;
         this.totalFactor = totalFactor;
+        this.orderDate = orderDate;
+        this.orderTime = orderTime;
+        this.orderStatus = orderStatus;
+        this.orderSerial = orderSerial;
+        this.shippingMethodDetails = shippingMethodDetails;
+    }
+
+    public String getShippingMethodDetails() {
+        return shippingMethodDetails;
+    }
+
+    public void setShippingMethodDetails(String shippingMethodDetails) {
+        this.shippingMethodDetails = shippingMethodDetails;
+    }
+
+    public String getOrderSerial() {
+        return orderSerial;
+    }
+
+    public void setOrderSerial(String orderSerial) {
+        this.orderSerial = orderSerial;
+    }
+
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public String getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(String orderTime) {
+        this.orderTime = orderTime;
+    }
+
+    public Category getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(Category orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public UserOrder() {

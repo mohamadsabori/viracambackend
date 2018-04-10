@@ -7,4 +7,5 @@ import org.springframework.data.repository.CrudRepository;
  * Created by msabori on 1/31/18.
  */
 public interface UserOrderRepository extends CrudRepository<UserOrder,Long> {
+    Iterable<UserOrder> findByUserPhoneNumber(String userPhoneNumber);
 }

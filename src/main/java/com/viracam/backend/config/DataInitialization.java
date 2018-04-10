@@ -122,31 +122,31 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
 
         ShippingMethod shippingMethod = shippingMethodRepository.findByCode("PEYK");
         if (shippingMethod == null) {
-            shippingMethod = new ShippingMethod("PEYK", "پیک");
+            shippingMethod = new ShippingMethod("PEYK", "پیک", false);
             shippingMethodRepository.save(shippingMethod);
         }
 
         shippingMethod = shippingMethodRepository.findByCode("TIPAKS");
         if (shippingMethod == null) {
-            shippingMethod = new ShippingMethod("TIPAKS", "تیپاکس");
+            shippingMethod = new ShippingMethod("TIPAKS", "تیپاکس", false);
             shippingMethodRepository.save(shippingMethod);
         }
 
         shippingMethod = shippingMethodRepository.findByCode("BARBARY");
         if (shippingMethod == null) {
-            shippingMethod = new ShippingMethod("BARBARY", "باربری");
+            shippingMethod = new ShippingMethod("BARBARY", "باربری", true);
             shippingMethodRepository.save(shippingMethod);
         }
 
         shippingMethod = shippingMethodRepository.findByCode("FOROSHGAH");
         if (shippingMethod == null) {
-            shippingMethod = new ShippingMethod("FOROSHGAH", "فروشگاه");
+            shippingMethod = new ShippingMethod("FOROSHGAH", "فروشگاه", false);
             shippingMethodRepository.save(shippingMethod);
         }
 
         shippingMethod = shippingMethodRepository.findByCode("POST");
         if (shippingMethod == null) {
-            shippingMethod = new ShippingMethod("POST", "پست");
+            shippingMethod = new ShippingMethod("POST", "پست", false);
             shippingMethodRepository.save(shippingMethod);
         }
     }
@@ -173,7 +173,7 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
             }
             ProductImages productImage = new ProductImages(bFile, file.getPath());
             productImage = imagesSevice.add(productImage);
-            if(product.getProductImages() == null){
+            if (product.getProductImages() == null) {
                 product.setProductImages(new ArrayList<ProductImages>());
             }
             product.getProductImages().add(productImage);

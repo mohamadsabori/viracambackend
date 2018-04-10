@@ -1,5 +1,6 @@
 package com.viracam.backend.services.productorder;
 
+import com.github.mfathi91.time.PersianDate;
 import com.viracam.backend.model.*;
 import com.viracam.backend.repository.category.CategoryRepository;
 import com.viracam.backend.repository.product.ProductRepository;
@@ -8,13 +9,12 @@ import com.viracam.backend.repository.productorder.ProductOrderRepository;
 import com.viracam.backend.repository.systemusers.SystemUsersRepository;
 import com.viracam.backend.repository.userorder.UserOrderRepository;
 import com.viracam.backend.util.CategoryCodes;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.Date;
 
 /**
  * Created by Mohammad on 1/17/2018.
@@ -63,16 +63,30 @@ public class ProductOrderServiceImpl implements ProductOrdersService {
 
     @Override
     public UserOrder addUserOrder(UserOrder userOrder) {
+        userOrder.setOrderStatus(categoryRepository.findByCode(CategoryCodes.START_ORDER));
+        userOrder.setOrderDate(PersianDate.now().toString());
+        userOrder.setOrderTime(String.valueOf(new Date().getTime()));
+        userOrder.setOrderSerial(getUserNewOrderSerial(userOrder.getUserPhoneNumber()));
+        BigDecimal totalFactor = BigDecimal.ZERO;
         for (ProductOrder order : userOrder.getOrderset()) {
             order.setOrderStatus(categoryRepository.findByCode(CategoryCodes.START_ORDER));
+            order.setOrderDate(PersianDate.now().toString());
+            order.setOrderTime(String.valueOf(new Date().getTime()));
             SystemUsers user = systemUsersRepository.findByUserPhoneNumber(userOrder.getUserPhoneNumber());
             if(user == null){
                 user = new SystemUsers(userOrder.getUserFullName(),userOrder.getUserPhoneNumber());
                 user = systemUsersRepository.save(user);
             }
             order.setUser(user);
+            totalFactor = totalFactor.add(order.getTotalPrice());
             productOrderRepository.save(order);
         }
+        userOrder.setTotalFactor(totalFactor);
         return orderRepository.save(userOrder);
+    }
+
+    private String getUserNewOrderSerial(String userPhoneNumber) {
+        ArrayList<UserOrder> userOrders = (ArrayList<UserOrder>) orderRepository.findByUserPhoneNumber(userPhoneNumber);
+        return String.valueOf(userOrders.size() + 1);
     }
 }

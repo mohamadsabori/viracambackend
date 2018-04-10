@@ -17,4 +17,9 @@ public class UserOrderServiceImpl implements UserOrderService {
     public UserOrder addUserOrder(UserOrder order) {
         return repository.save(order);
     }
+
+    @Override
+    public Iterable<UserOrder> getUserOrders(String userPhoneNumber) {
+        return repository.findByUserPhoneNumber(userPhoneNumber);
+    }
 }

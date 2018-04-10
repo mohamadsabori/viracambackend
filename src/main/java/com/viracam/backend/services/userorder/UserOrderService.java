@@ -7,4 +7,6 @@ import com.viracam.backend.model.UserOrder;
  */
 public interface UserOrderService {
     UserOrder addUserOrder(UserOrder order);
+
+    Iterable<UserOrder> getUserOrders(String userPhoneNumber);
 }

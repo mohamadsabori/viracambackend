@@ -19,4 +19,10 @@ public class UserOrderController {
     public UserOrder addUserOrder(@RequestBody UserOrder order){
         return service.addUserOrder(order);
     }
+
+    @RequestMapping(value = "/loaduserorders/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Iterable<UserOrder> getUserOrders(@RequestBody @PathVariable("id") String userPhoneNumber) {
+        return service.getUserOrders(userPhoneNumber);
+    }
 }
