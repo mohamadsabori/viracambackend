@@ -8,7 +8,6 @@ import com.viracam.backend.services.productimages.ProductImagesSevice;
 import com.viracam.backend.services.shippingmethod.ShippingMethodRepository;
 import com.viracam.backend.services.systemusers.SystemUsersService;
 import com.viracam.backend.util.CategoryCodes;
-import org.hibernate.collection.internal.PersistentSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +19,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by Mohammad on 8/31/2017.
@@ -122,31 +118,31 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
 
         ShippingMethod shippingMethod = shippingMethodRepository.findByCode("PEYK");
         if (shippingMethod == null) {
-            shippingMethod = new ShippingMethod("PEYK", "پیک", false);
+            shippingMethod = new ShippingMethod("PEYK", "پیک");
             shippingMethodRepository.save(shippingMethod);
         }
 
         shippingMethod = shippingMethodRepository.findByCode("TIPAKS");
         if (shippingMethod == null) {
-            shippingMethod = new ShippingMethod("TIPAKS", "تیپاکس", false);
+            shippingMethod = new ShippingMethod("TIPAKS", "تیپاکس");
             shippingMethodRepository.save(shippingMethod);
         }
 
         shippingMethod = shippingMethodRepository.findByCode("BARBARY");
         if (shippingMethod == null) {
-            shippingMethod = new ShippingMethod("BARBARY", "باربری", true);
+            shippingMethod = new ShippingMethod("BARBARY", "باربری");
             shippingMethodRepository.save(shippingMethod);
         }
 
         shippingMethod = shippingMethodRepository.findByCode("FOROSHGAH");
         if (shippingMethod == null) {
-            shippingMethod = new ShippingMethod("FOROSHGAH", "فروشگاه", false);
+            shippingMethod = new ShippingMethod("FOROSHGAH", "فروشگاه");
             shippingMethodRepository.save(shippingMethod);
         }
 
         shippingMethod = shippingMethodRepository.findByCode("POST");
         if (shippingMethod == null) {
-            shippingMethod = new ShippingMethod("POST", "پست", false);
+            shippingMethod = new ShippingMethod("POST", "پست");
             shippingMethodRepository.save(shippingMethod);
         }
     }

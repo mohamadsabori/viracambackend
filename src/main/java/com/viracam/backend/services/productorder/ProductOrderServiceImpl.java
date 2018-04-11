@@ -1,6 +1,5 @@
 package com.viracam.backend.services.productorder;
 
-import com.github.mfathi91.time.PersianDate;
 import com.viracam.backend.model.*;
 import com.viracam.backend.repository.category.CategoryRepository;
 import com.viracam.backend.repository.product.ProductRepository;
@@ -9,6 +8,7 @@ import com.viracam.backend.repository.productorder.ProductOrderRepository;
 import com.viracam.backend.repository.systemusers.SystemUsersRepository;
 import com.viracam.backend.repository.userorder.UserOrderRepository;
 import com.viracam.backend.util.CategoryCodes;
+import com.viracam.backend.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,13 +64,13 @@ public class ProductOrderServiceImpl implements ProductOrdersService {
     @Override
     public UserOrder addUserOrder(UserOrder userOrder) {
         userOrder.setOrderStatus(categoryRepository.findByCode(CategoryCodes.START_ORDER));
-        userOrder.setOrderDate(PersianDate.now().toString());
+        userOrder.setOrderDate(DateUtil.getDate());
         userOrder.setOrderTime(String.valueOf(new Date().getTime()));
         userOrder.setOrderSerial(getUserNewOrderSerial(userOrder.getUserPhoneNumber()));
         BigDecimal totalFactor = BigDecimal.ZERO;
         for (ProductOrder order : userOrder.getOrderset()) {
             order.setOrderStatus(categoryRepository.findByCode(CategoryCodes.START_ORDER));
-            order.setOrderDate(PersianDate.now().toString());
+            order.setOrderDate(DateUtil.getDate());
             order.setOrderTime(String.valueOf(new Date().getTime()));
             SystemUsers user = systemUsersRepository.findByUserPhoneNumber(userOrder.getUserPhoneNumber());
             if(user == null){

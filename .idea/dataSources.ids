@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - masoud_viracam@10.20.11.85" uuid="11305c3a-7c43-40d0-879a-5d8cb7316679">
+    <database-info product="MySQL" version="5.1.36-community-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.45 ( Revision: 9131eefa398531c7dc98776e8a3fe839e544c5b2 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
+      <schema id="1" name="masoud_viracam"/>
+      <table id="2" parent="1" name="t_category"/>
+      <table id="3" parent="1" name="t_product"/>
+      <table id="4" parent="1" name="t_product_product_images"/>
+      <table id="5" parent="1" name="t_product_product_properties"/>
+      <table id="6" parent="1" name="t_productcategory"/>
+      <table id="7" parent="1" name="t_productimages"/>
+      <table id="8" parent="1" name="t_productorder"/>
+      <table id="9" parent="1" name="t_productproperties"/>
+      <table id="10" parent="1" name="t_shipping_method"/>
+      <table id="11" parent="1" name="t_systemusers"/>
+      <table id="12" parent="1" name="t_user_order"/>
+      <table id="13" parent="1" name="t_user_order_orderset"/>
+      <column id="14" parent="2" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="15" parent="2" name="c_code">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="16" parent="2" name="c_value">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <key id="17" parent="2" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="18" parent="3" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="19" parent="3" name="c_cost">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="20" parent="3" name="c_description">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="21" parent="3" name="c_name">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="22" parent="3" name="c_productcode">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="23" parent="3" name="category_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="24" parent="3" name="FKsoqykma3h1lbev7dwj5tl84dy">
+        <columns>category_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="25" parent="3" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="26" parent="4" name="t_product_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="27" parent="4" name="product_images_c_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="28" parent="4" name="FKgtl93llj6ylsv1yoftdbe86qk">
+        <columns>t_product_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="29" parent="4" name="UK_7vqy32hbqmaei6enk02bht7en">
+        <columns>product_images_c_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="30" parent="4" name="UK_7vqy32hbqmaei6enk02bht7en">
+        <columns>product_images_c_id</columns>
+        <underlying-index>UK_7vqy32hbqmaei6enk02bht7en</underlying-index>
+      </key>
+      <column id="31" parent="5" name="t_product_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="32" parent="5" name="product_properties_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="33" parent="5" name="UK_q6dx9x9suw5bkju09u7tp3t59">
+        <columns>product_properties_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="34" parent="5" name="PRIMARY">
+        <columns>t_product_id
+product_properties_id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="35" parent="5" name="UK_q6dx9x9suw5bkju09u7tp3t59">
+        <columns>product_properties_id</columns>
+        <underlying-index>UK_q6dx9x9suw5bkju09u7tp3t59</underlying-index>
+      </key>
+      <column id="36" parent="6" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="37" parent="6" name="c_categoryname">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="38" parent="6" name="c_code">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <key id="39" parent="6" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="40" parent="7" name="c_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="41" parent="7" name="c_filename">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="42" parent="7" name="c_photo">
+        <data-type>longblob</data-type>
+      </column>
+      <key id="43" parent="7" name="PRIMARY">
+        <columns>c_id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="44" parent="8" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="45" parent="8" name="c_orderdate">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="46" parent="8" name="c_ordertime">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="47" parent="8" name="qty">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="48" parent="8" name="total_price">
+        <data-type>decimal(19,2)</data-type>
+      </column>
+      <column id="49" parent="8" name="order_status_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="50" parent="8" name="product_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="51" parent="8" name="user_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="52" parent="8" name="user_order_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="53" parent="8" name="FK9nt1ji4m6wa91iadmn8t8yhni">
+        <columns>order_status_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="54" parent="8" name="FKb7n6dbij84n7rfdh4x9mlvvv2">
+        <columns>product_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="55" parent="8" name="FKlivli3rm4gi2oi8ckfwcpxirm">
+        <columns>user_order_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="56" parent="8" name="FKpbrkwlkkeicj9jjj1934u4hks">
+        <columns>user_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="57" parent="8" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="58" parent="9" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="59" parent="9" name="c_value">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="60" parent="9" name="product_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="61" parent="9" name="FK3ihfnth6tamo0whlmgss7lp78">
+        <columns>product_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="62" parent="9" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="63" parent="10" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="64" parent="10" name="c_code">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="65" parent="10" name="c_value">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <key id="66" parent="10" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="67" parent="11" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="68" parent="11" name="c_username">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="69" parent="11" name="c_userphonenumber">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <key id="70" parent="11" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="71" parent="12" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="72" parent="12" name="c_orderdate">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="73" parent="12" name="c_ordertime">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="74" parent="12" name="c_totalfactor">
+        <data-type>decimal(19,2)</data-type>
+      </column>
+      <column id="75" parent="12" name="c_useraddress">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="76" parent="12" name="c_userfullname">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="77" parent="12" name="c_userphonenumber">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="78" parent="12" name="order_status_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="79" parent="12" name="shipping_method_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="80" parent="12" name="FK24lgvcftvjylguteht6lclynm">
+        <columns>order_status_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="81" parent="12" name="FKncrhinyb98siaewbwja1wgbj2">
+        <columns>shipping_method_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="82" parent="12" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="83" parent="13" name="t_user_order_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="84" parent="13" name="orderset_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="85" parent="13" name="UK_cvcqyf5964p53cmx71u0y3ro9">
+        <columns>orderset_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="86" parent="13" name="PRIMARY">
+        <columns>t_user_order_id
+orderset_id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="87" parent="13" name="UK_cvcqyf5964p53cmx71u0y3ro9">
+        <columns>orderset_id</columns>
+        <underlying-index>UK_cvcqyf5964p53cmx71u0y3ro9</underlying-index>
+      </key>
+    </database-model>
+  </data-source>
+</component>

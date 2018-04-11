@@ -112,7 +112,7 @@
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:4.2.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:4.2.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.43" level="project" />
-    <orderEntry type="library" name="Maven: com.github.mfathi91:persian-date-time:3.1.0" level="project" />
-    <orderEntry type="library" name="Maven: net.jcip:jcip-annotations:1.0" level="project" />
+    <orderEntry type="library" name="Maven: ir.ghasemkiani:persiancalendar:2.1.7" level="project" />
+    <orderEntry type="library" name="Maven: com.ibm.icu:icu4j:52.1" level="project" />
   </component>
 </module>

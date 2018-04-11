@@ -18,34 +18,20 @@ public class ShippingMethod implements Serializable {
     String code;
     @Column(name = "C_VALUE")
     String value;
-    @Column(name = "C_HASDETAILADDRESS")
-    boolean hasDetailAddress;
 
     @JsonCreator
     public ShippingMethod(@JsonProperty("code")String code
             ,@JsonProperty("value") String value
-            ,@JsonProperty("id") long id
-            ,@JsonProperty("hasDetailAddress") boolean hasDetailAddress) {
+            ,@JsonProperty("id") long id) {
         this.code = code;
         this.value = value;
         this.id = id;
-        this.hasDetailAddress = hasDetailAddress;
-    }
-
-    public boolean isHasDetailAddress() {
-        return hasDetailAddress;
-    }
-
-    public void setHasDetailAddress(boolean hasDetailAddress) {
-        this.hasDetailAddress = hasDetailAddress;
     }
 
     public ShippingMethod(String code
-            , String value
-            , boolean hasDetailAddress) {
+            , String value) {
         this.code = code;
         this.value = value;
-        this.hasDetailAddress = hasDetailAddress;
     }
 
     public ShippingMethod() {
