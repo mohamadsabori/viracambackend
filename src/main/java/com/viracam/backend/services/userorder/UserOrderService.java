@@ -13,4 +13,8 @@ public interface UserOrderService {
     Iterable<UserOrder> getAllUsersOrders();
 
     UserOrder findById(long id);
+
+    Iterable<UserOrder> confirmOrder(long id);
+
+    Iterable<UserOrder> cancelOrder(long id);
 }

@@ -64,6 +64,10 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
         if (category == null) {
             categoryService.addCategory(new Category(CategoryCodes.CONFIRM_ORDER, "تایید سفارش"));
         }
+        category = categoryService.findByCode(CategoryCodes.CANCEL_ORDER);
+        if (category == null) {
+            categoryService.addCategory(new Category(CategoryCodes.CANCEL_ORDER, "لغو سفارش"));
+        }
 
         new StorageService().init();
 
