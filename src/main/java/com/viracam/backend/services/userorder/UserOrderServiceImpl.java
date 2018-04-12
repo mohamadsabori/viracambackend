@@ -22,4 +22,14 @@ public class UserOrderServiceImpl implements UserOrderService {
     public Iterable<UserOrder> getUserOrders(String userPhoneNumber) {
         return repository.findByUserPhoneNumber(userPhoneNumber);
     }
+
+    @Override
+    public Iterable<UserOrder> getAllUsersOrders() {
+        return repository.findAll();
+    }
+
+    @Override
+    public UserOrder findById(long id) {
+        return repository.findOne(id);
+    }
 }

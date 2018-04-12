@@ -25,4 +25,28 @@ public class UserOrderController {
     public Iterable<UserOrder> getUserOrders(@RequestBody @PathVariable("id") String userPhoneNumber) {
         return service.getUserOrders(userPhoneNumber);
     }
+
+    @RequestMapping(value = "/loadallusersorders", method = RequestMethod.GET)
+    @ResponseBody
+    public Iterable<UserOrder> getAllUsersOrders() {
+        return service.getAllUsersOrders();
+    }
+
+    @RequestMapping(value = "/loadallusersordersbyid/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public UserOrder getAllUsersOrders(@RequestBody @PathVariable("id") long id) {
+        return service.findById(id);
+    }
+
+    @RequestMapping(value = "/confirmOrder/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public UserOrder confirmOrder(@RequestBody @PathVariable("id") long id) {
+        return service.confirmOrder(id);
+    }
+
+    @RequestMapping(value = "/cancelOrder/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public UserOrder cancelOrder(@RequestBody @PathVariable("id") long id) {
+        return service.cancelOrder(id);
+    }
 }

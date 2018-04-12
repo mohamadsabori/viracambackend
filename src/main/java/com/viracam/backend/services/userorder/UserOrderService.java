@@ -9,4 +9,8 @@ public interface UserOrderService {
     UserOrder addUserOrder(UserOrder order);
 
     Iterable<UserOrder> getUserOrders(String userPhoneNumber);
+
+    Iterable<UserOrder> getAllUsersOrders();
+
+    UserOrder findById(long id);
 }
