@@ -11,4 +11,5 @@ public interface ProductRepository extends CrudRepository<Product,Long> {
     Product findByProductCode(String code);
 
     Iterable<Product> findByCategory(ProductCategory category);
+    Iterable<Product> findByEnable(boolean enable);
 }

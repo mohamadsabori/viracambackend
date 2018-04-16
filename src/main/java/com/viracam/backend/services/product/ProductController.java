@@ -114,4 +114,10 @@ public class ProductController {
     public Iterable<ShippingMethod> loadAllshippingMethods() {
         return service.loadAllshippingMethods();
     }
+
+    @RequestMapping(path = "deleteProduct", method = RequestMethod.POST)
+    public Iterable<Product> deleteProduct(@RequestBody long id) {
+        service.deleteProduct(id);
+        return loadAllCredit();
+    }
 }

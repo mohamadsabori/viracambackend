@@ -36,6 +36,8 @@ public class Product implements Serializable {
 
     @ManyToOne
     private ProductCategory category;
+    @Column(name = "C_ENABLE")
+    private boolean enable;
 
     @JsonCreator
     public Product(@JsonProperty("id") long id
@@ -45,6 +47,7 @@ public class Product implements Serializable {
             ,@JsonProperty("productCode") String productCode
             ,@JsonProperty("productProperties") Set<ProductProperties> productProperties
             ,@JsonProperty("category") ProductCategory category
+            ,@JsonProperty("enable") boolean enable
             ) {
         this.id = id;
         this.name = name;
@@ -53,6 +56,7 @@ public class Product implements Serializable {
         this.productCode = productCode;
         this.productProperties = productProperties;
         this.category = category;
+        this.enable = enable;
     }
 
     public Product(String name
@@ -69,6 +73,14 @@ public class Product implements Serializable {
         this.productCode = productCode;
         this.productProperties = productProperties;
         this.category = category;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 
     public ProductCategory getCategory() {

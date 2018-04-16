@@ -16,5 +16,6 @@ public interface UserOrderService {
 
     Iterable<UserOrder> confirmOrder(long id);
 
-    Iterable<UserOrder> cancelOrder(long id);
+    Iterable<UserOrder>
+    cancelOrder(long id);
 }

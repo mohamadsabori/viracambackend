@@ -40,7 +40,7 @@ public class ProductsServiceImpl implements ProductsService {
     Logger log = Logger.getLogger(this.getClass().getName());
 
     public Iterable<Product> findAll() {
-        Iterable<Product> products = repository.findAll();
+        Iterable<Product> products = repository.findByEnable(true);
         ArrayList<Product> list = new ArrayList<Product>();
         for (Product product : products) {
             Product product1 = product;
@@ -174,5 +174,12 @@ public class ProductsServiceImpl implements ProductsService {
     @Override
     public Product loadProductById(long productId) {
         return repository.findOne(productId);
+    }
+
+    @Override
+    public Product deleteProduct(long productId) {
+        Product product = repository.findOne(productId);
+        product.setEnable(false);
+        return repository.save(product);
     }
 }

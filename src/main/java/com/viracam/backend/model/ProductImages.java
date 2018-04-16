@@ -14,6 +14,7 @@ public class ProductImages implements Serializable {
     private String filename;
     @Column(name = "C_PHOTO")
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     private byte[] photo;
     @Id
     @Column(name = "C_ID")
