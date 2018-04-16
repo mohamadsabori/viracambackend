@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,6 +44,7 @@ public class ProductController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public Product addProductPost(@RequestBody Product product) {
+        product.setEnable(true);
         return service.addProductWithoutImages(product);
     }
 
@@ -116,8 +118,9 @@ public class ProductController {
     }
 
     @RequestMapping(path = "deleteProduct", method = RequestMethod.POST)
-    public Iterable<Product> deleteProduct(@RequestBody long id) {
-        service.deleteProduct(id);
+    @ResponseBody
+    public Iterable<Product> deleteProduct(@RequestBody Product product) {
+        service.deleteProduct(product.getId());
         return loadAllCredit();
     }
 }
