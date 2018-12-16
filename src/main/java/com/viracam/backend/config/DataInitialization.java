@@ -46,7 +46,6 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        if (true) return;
         SystemUsers users = usersService.findByUserPhoneNumber("09124850689");
         if (users == null) {
             usersService.addUser(new SystemUsers("Mohamad", "09124850689"));
@@ -68,6 +67,13 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
         if (category == null) {
             categoryService.addCategory(new Category(CategoryCodes.CANCEL_ORDER, "لغو سفارش"));
         }
+
+        category = categoryService.findByCode(CategoryCodes.ORDER_PAIED);
+        if (category == null) {
+            categoryService.addCategory(new Category(CategoryCodes.ORDER_PAIED, "پرداخت شده"));
+        }
+
+        if(true) return;
 
         new StorageService().init();
 

@@ -49,4 +49,10 @@ public class UserOrderController {
     public Iterable<UserOrder> cancelOrder(@RequestBody @PathVariable("id") long id) {
         return service.cancelOrder(id);
     }
+
+    @RequestMapping(value = "/userOrderPaid/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Iterable<UserOrder> userOrderPaid(@RequestBody @PathVariable("id") long id) {
+        return service.userOrderPaid(id);
+    }
 }

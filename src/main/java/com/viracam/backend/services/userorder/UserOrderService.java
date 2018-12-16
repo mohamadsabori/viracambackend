@@ -18,4 +18,6 @@ public interface UserOrderService {
 
     Iterable<UserOrder>
     cancelOrder(long id);
+
+    Iterable<UserOrder> userOrderPaid(long id);
 }

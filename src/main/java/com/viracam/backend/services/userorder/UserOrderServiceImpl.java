@@ -55,4 +55,13 @@ public class UserOrderServiceImpl implements UserOrderService {
         repository.save(order);
         return getAllUsersOrders();
     }
+
+    @Override
+    public Iterable<UserOrder> userOrderPaid(long id) {
+        UserOrder order = findById(id);
+        Category category = categoryService.findByCode(CategoryCodes.ORDER_PAIED);
+        order.setOrderStatus(category);
+        repository.save(order);
+        return getAllUsersOrders();
+    }
 }

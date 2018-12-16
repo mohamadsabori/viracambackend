@@ -145,11 +145,14 @@ public class ProductsServiceImpl implements ProductsService {
         for (Product product : products) {
             Hibernate.initialize(product.getProductProperties());
             ProductDTO dto = new ProductDTO();
+            Set<ProductProperties> properties = new HashSet<ProductProperties>();
+            String filename = "";
             for (ProductImages image : product.getProductImages()) {
-                Set<ProductProperties> properties = propertiesRepository.findByProduct(product);
-                dto = new ProductDTO(product.getName(), image.getFilename(), product.getDescription(), product.getId(), product.getCost(), properties);
+                properties = propertiesRepository.findByProduct(product);
+                filename = image.getFilename();
                 break;
             }
+            dto = new ProductDTO(product.getName(), filename, product.getDescription(), product.getId(), product.getCost(), properties);
             dtos.add(dto);
         }
         return dtos;
