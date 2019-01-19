@@ -32,7 +32,14 @@ public class ProductOrder implements Serializable {
     UserOrder userOrder;
     int qty;
     BigDecimal totalPrice;
-
+    @Column(name = "C_disCount")
+    BigDecimal disCount;
+    @Column(name = "C_ORDERPAYDATE")
+    private String orderPayDate;
+    @Column(name = "C_ORDERPAYTIME")
+    private String orderPayTime;
+    @Column(name = "C_REFID")
+    private String refID;
 
     @JsonCreator
     public ProductOrder(@JsonProperty("id")long id,
@@ -43,7 +50,12 @@ public class ProductOrder implements Serializable {
                         @JsonProperty("orderStatus")Category orderStatus,
                         @JsonProperty("userOrder")UserOrder userOrder,
                         @JsonProperty("qty")int qty,
-                        @JsonProperty("totalPrice")BigDecimal totalPrice) {
+                        @JsonProperty("totalPrice")BigDecimal totalPrice,
+                        @JsonProperty("disCount")BigDecimal disCount,
+                        @JsonProperty("orderPayTime")String orderPayTime,
+                        @JsonProperty("orderPayDate")String orderPayDate,
+                        @JsonProperty("refID")String refID
+    ) {
         this.id = id;
         this.product = product;
         this.user = user;
@@ -53,9 +65,16 @@ public class ProductOrder implements Serializable {
         this.userOrder = userOrder;
         this.qty = qty;
         this.totalPrice = totalPrice;
+        this.disCount = disCount;
+        this.orderPayDate = orderPayDate;
+        this.orderPayTime = orderPayTime;
+        this.refID = refID;
     }
 
-    public ProductOrder(Product product, SystemUsers user, String orderDate, String orderTime, Category orderStatus,UserOrder userOrder,int qty,BigDecimal totalPrice) {
+    public ProductOrder(Product product, SystemUsers user, String orderDate
+    , String orderTime, Category orderStatus,UserOrder userOrder,int qty
+    ,BigDecimal totalPrice
+    ,BigDecimal disCount) {
         this.product = product;
         this.user = user;
         this.orderDate = orderDate;
@@ -64,6 +83,7 @@ public class ProductOrder implements Serializable {
         this.userOrder = userOrder;
         this.qty = qty;
         this.totalPrice = totalPrice;
+        this.disCount = disCount;
     }
 
     public ProductOrder() {
@@ -139,5 +159,47 @@ public class ProductOrder implements Serializable {
 
     public void setOrderStatus(Category orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    /**
+     * @return the disCount
+     */
+    public BigDecimal getDisCount() {
+        return disCount;
+    }
+
+    /**
+     * @param disCount the disCount to set
+     */
+    public void setDisCount(BigDecimal disCount) {
+        this.disCount = disCount;
+    }
+
+    public void setOrderPayDate(String orderPayDate) {
+        this.orderPayDate = orderPayDate;
+    }
+
+    public String getOrderPayDate() {
+        return orderPayDate;
+    }
+
+    public void setOrderPayTime(String orderPayTime) {
+        this.orderPayTime = orderPayTime;
+    }
+
+    public String getOrderPayTime() {
+        return orderPayTime;
+    }
+
+    public void setrefID(String refID) {
+        this.refID = refID;
+    }
+
+    public String getRefID() {
+        return refID;
+    }
+
+    public void setRefID(String refID) {
+        this.refID = refID;
     }
 }

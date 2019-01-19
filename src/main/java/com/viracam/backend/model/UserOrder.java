@@ -39,6 +39,12 @@ public class UserOrder implements Serializable {
     @OneToOne
 //    @Column(name = "C_ORDERSTATUS")
     Category orderStatus;
+    @Column(name = "C_ORDERPAYDATE")
+    private String orderPayDate;
+    @Column(name = "C_ORDERPAYTIME")
+    private String orderPayTime;
+    @Column(name = "C_REFID")
+    private String refID;
 
 
     @JsonCreator
@@ -53,7 +59,11 @@ public class UserOrder implements Serializable {
             ,@JsonProperty("orderTime")String orderTime
             ,@JsonProperty("orderStatus")Category orderStatus
             ,@JsonProperty("orderSerial")String orderSerial
-            ,@JsonProperty("shippingMethodDetails")String shippingMethodDetails) {
+            ,@JsonProperty("shippingMethodDetails")String shippingMethodDetails
+            ,@JsonProperty("orderPayDate")String orderPayDate
+            ,@JsonProperty("orderPayTime")String orderPayTime
+            ,@JsonProperty("refID")String refID
+    ) {
         this.id = id;
         this.orderset = orderset;
         this.userFullName = userFullName;
@@ -66,6 +76,9 @@ public class UserOrder implements Serializable {
         this.orderStatus = orderStatus;
         this.orderSerial = orderSerial;
         this.shippingMethodDetails = shippingMethodDetails;
+        this.orderPayTime = orderPayTime;
+        this.orderPayDate = orderPayDate;
+        this.refID = refID;
     }
 
     public String getShippingMethodDetails() {
@@ -165,5 +178,33 @@ public class UserOrder implements Serializable {
 
     public void setShippingMethod(ShippingMethod shippingMethod) {
         this.shippingMethod = shippingMethod;
+    }
+
+    public void setOrderPayDate(String orderPayDate) {
+        this.orderPayDate = orderPayDate;
+    }
+
+    public String getOrderPayDate() {
+        return orderPayDate;
+    }
+
+    public void setOrderPayTime(String orderPayTime) {
+        this.orderPayTime = orderPayTime;
+    }
+
+    public String getOrderPayTime() {
+        return orderPayTime;
+    }
+
+    public void setrefID(String refID) {
+        this.refID = refID;
+    }
+
+    public String getRefID() {
+        return refID;
+    }
+
+    public void setRefID(String refID) {
+        this.refID = refID;
     }
 }

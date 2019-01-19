@@ -16,10 +16,7 @@ import org.springframework.web.multipart.support.StandardMultipartHttpServletReq
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
@@ -51,36 +48,41 @@ public class ProductController {
     @RequestMapping(value = "/add/image", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity upload(@RequestParam("id") long productId, HttpServletResponse response, HttpServletRequest request) {
-        try {
-            Product product = service.findOne(productId);
-            StandardMultipartHttpServletRequest request1 = (StandardMultipartHttpServletRequest) request;
-            MultipartHttpServletRequest multipart = (MultipartHttpServletRequest) request;
-            while (multipart.getFileNames().hasNext()){
-                Iterator<String> it = multipart.getFileNames();
-                MultipartFile files = multipart.getFile(it.next());
-                String fileName = productId + ".png";
-                byte[] bytes = files.getBytes();
-                service.store(files, product.getId());
-            /*BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("/src/main/resources/static/images/product" + fileName)));
-            stream.write(bytes);
-            stream.close();*/
-                // Saving to data base
-                ProductImages productImage = new ProductImages(bytes, product.getId() + "/" + files.getOriginalFilename());
-                productImage = imagesSevice.add(productImage);
-                product.getProductImages().add(productImage);
-                service.updateProduct(product);
-                return new ResponseEntity("Upload success!", HttpStatus.OK);
+        Product product = service.findOne(productId);
+        StandardMultipartHttpServletRequest request1 = (StandardMultipartHttpServletRequest) request;
+        MultipartHttpServletRequest multipart = (MultipartHttpServletRequest) request;
+        while (multipart.getFileNames().hasNext()){
+            Iterator<String> it = multipart.getFileNames();
+            MultipartFile files = multipart.getFile(it.next());
+            String fileName = productId + ".png";
+            byte[] bytes = new byte[0];
+            try {
+                bytes = files.getBytes();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            return new ResponseEntity("No File to upload!", HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity("upload failed!", HttpStatus.BAD_REQUEST);
+            try{
+                service.store(files, product.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        /*BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("/src/main/resources/static/images/product" + fileName)));
+        stream.write(bytes);
+        stream.close();*/
+            // Saving to data base
+            ProductImages productImage = new ProductImages(bytes, product.getId() + "/" + files.getOriginalFilename());
+            productImage = imagesSevice.add(productImage);
+            product.getProductImages().add(productImage);
+            service.updateProduct(product);
+            return new ResponseEntity("Upload success!", HttpStatus.OK);
         }
+        return new ResponseEntity("No File to upload!", HttpStatus.OK);
     }
 
     @RequestMapping(path = "files", method = RequestMethod.GET)
     public ResponseEntity<Resource> getFile(@RequestParam("id") long productId, @RequestParam("filename") String fileName) {
+        if(fileName.equals("")) return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+                .body(null);
         Resource file = service.getFile(fileName);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
                 .body(file);

@@ -13,6 +13,8 @@ import java.util.Set;
  */
 public class ProductDTO implements Serializable {
     private static final long serialVersionUID = 2L;
+    private String discountCondition;
+    private String discount;
     private String title;
     private String fileSource;
     private String note;
@@ -20,6 +22,21 @@ public class ProductDTO implements Serializable {
     private String cost;
     private ArrayList<ProductPropertiesDTO> properties;
 
+    public String getDiscountCondition() {
+        return discountCondition;
+    }
+
+    public void setDiscountCondition(String discountCondition) {
+        this.discountCondition = discountCondition;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
 
     public String getCost() {
         return cost;
@@ -43,13 +60,17 @@ public class ProductDTO implements Serializable {
             , @JsonProperty("note")String note
             ,@JsonProperty("id")long id
             ,@JsonProperty("cost")String cost
-            ,@JsonProperty("properties")Set<ProductProperties> properties) {
+            ,@JsonProperty("properties")Set<ProductProperties> properties
+            ,@JsonProperty("discountCondition") String discountCondition
+            ,@JsonProperty("discount") String discount) {
         this.title = title;
         this.fileSource = fileSource;
         this.note = note;
         this.id = id;
         this.cost = cost;
         this.properties = new ArrayList<ProductPropertiesDTO>();
+        this.discountCondition = discountCondition;
+        this.discount = discount;
         for (ProductProperties property : properties) {
             this.properties.add(new ProductPropertiesDTO(property.getValue(),property.getId()));
         }

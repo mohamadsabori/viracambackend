@@ -17,6 +17,10 @@ import java.util.Set;
 @Entity(name = "T_PRODUCT")
 public class Product implements Serializable {
 
+    @Column(name = "C_DISCOUNTCONDITION")
+    String discountCondition;
+    @Column(name = "C_DISCOUNT")
+    String discount;
     @Column(name = "C_NAME")
     String name;
     @Column(name = "C_COST")
@@ -48,6 +52,8 @@ public class Product implements Serializable {
             ,@JsonProperty("productProperties") Set<ProductProperties> productProperties
             ,@JsonProperty("category") ProductCategory category
             ,@JsonProperty("enable") boolean enable
+            ,@JsonProperty("discountCondition") String discountCondition
+            ,@JsonProperty("discount") String discount
             ) {
         this.id = id;
         this.name = name;
@@ -57,6 +63,8 @@ public class Product implements Serializable {
         this.productProperties = productProperties;
         this.category = category;
         this.enable = enable;
+        this.discount = discount;
+        this.discountCondition = discountCondition;
     }
 
     public Product(String name
@@ -65,7 +73,9 @@ public class Product implements Serializable {
             , List<ProductImages> productImages
             , String productCode
             , Set<ProductProperties> productProperties
-            ,ProductCategory category) {
+            ,ProductCategory category
+            ,String discountCondition
+            ,String discount) {
         this.name = name;
         this.cost = cost;
         this.description = description;
@@ -73,6 +83,8 @@ public class Product implements Serializable {
         this.productCode = productCode;
         this.productProperties = productProperties;
         this.category = category;
+        this.discountCondition = discountCondition;
+        this.discount = discount;
     }
 
     public boolean isEnable() {
@@ -149,5 +161,21 @@ public class Product implements Serializable {
 
     public void setProductImages(List<ProductImages> productImages) {
         this.productImages = productImages;
+    }
+
+    public String getDiscountCondition() {
+        return discountCondition;
+    }
+
+    public void setDiscountCondition(String discountCondition) {
+        this.discountCondition = discountCondition;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
     }
 }

@@ -35,6 +35,12 @@ public class ProductOrderController {
         return service.confirmProductOrder(order);
     }
 
+    @RequestMapping(value = "/userOrderPaid", method = RequestMethod.GET)
+    @ResponseBody
+    public UserOrder userOrderPaid(@RequestParam(value = "id", required = true) long id,@RequestParam(value = "refID", required = true) String refID) {
+        return service.userOrderPaid(id,refID);
+    }
+
     @RequestMapping(value = "/loaduserproductorders/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ArrayList<ProductOrder> getUserProductOrders(@RequestBody @PathVariable("id") String userPhoneNumber) {

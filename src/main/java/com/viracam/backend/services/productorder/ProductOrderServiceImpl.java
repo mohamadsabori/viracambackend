@@ -38,7 +38,8 @@ public class ProductOrderServiceImpl implements ProductOrdersService {
     public ProductOrder registerNewOrder(long productId, String userPhoneNumber) {
         SystemUsers user = systemUsersRepository.findByUserPhoneNumber(userPhoneNumber);
         Product product = productRepository.findOne(productId);
-        ProductOrder order = new ProductOrder(product, user, "", "", categoryRepository.findByCode("START_ORDER"), new UserOrder(), 0,BigDecimal.ZERO);
+        ProductOrder order = new ProductOrder(product, user, "", "", categoryRepository.findByCode("START_ORDER")
+        , new UserOrder(), 0,BigDecimal.ZERO, new BigDecimal(product.getDiscount()));
         return productOrderRepository.save(order);
     }
 
@@ -63,13 +64,14 @@ public class ProductOrderServiceImpl implements ProductOrdersService {
 
     @Override
     public UserOrder addUserOrder(UserOrder userOrder) {
-        userOrder.setOrderStatus(categoryRepository.findByCode(CategoryCodes.START_ORDER));
+        Category orderStatus = categoryRepository.findByCode(CategoryCodes.START_ORDER);
+        userOrder.setOrderStatus(orderStatus);
         userOrder.setOrderDate(DateUtil.getDate());
         userOrder.setOrderTime(String.valueOf(new Date().getTime()));
         userOrder.setOrderSerial(getUserNewOrderSerial(userOrder.getUserPhoneNumber()));
         BigDecimal totalFactor = BigDecimal.ZERO;
         for (ProductOrder order : userOrder.getOrderset()) {
-            order.setOrderStatus(categoryRepository.findByCode(CategoryCodes.START_ORDER));
+            order.setOrderStatus(orderStatus);
             order.setOrderDate(DateUtil.getDate());
             order.setOrderTime(String.valueOf(new Date().getTime()));
             SystemUsers user = systemUsersRepository.findByUserPhoneNumber(userOrder.getUserPhoneNumber());
@@ -88,5 +90,22 @@ public class ProductOrderServiceImpl implements ProductOrdersService {
     private String getUserNewOrderSerial(String userPhoneNumber) {
         ArrayList<UserOrder> userOrders = (ArrayList<UserOrder>) orderRepository.findByUserPhoneNumber(userPhoneNumber);
         return String.valueOf(userOrders.size() + 1);
+    }
+
+    public UserOrder userOrderPaid(long id,String refID){
+        Category orderStatus = categoryRepository.findByCode(CategoryCodes.ORDER_PAIED);
+        UserOrder userOrder = orderRepository.findOne(id);
+        userOrder.setOrderStatus(orderStatus);
+        userOrder.setOrderPayDate(DateUtil.getDate());
+        userOrder.setOrderPayTime(String.valueOf(new Date().getTime()));
+        userOrder.setrefID(refID);
+        for (ProductOrder order : userOrder.getOrderset()) {
+            order.setOrderStatus(orderStatus);
+            order.setOrderPayDate(DateUtil.getDate());
+            order.setOrderPayTime(String.valueOf(new Date().getTime()));
+            order.setrefID(refID);;
+            productOrderRepository.save(order);
+        }
+        return orderRepository.save(userOrder);
     }
 }

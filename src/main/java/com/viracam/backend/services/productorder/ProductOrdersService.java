@@ -18,4 +18,6 @@ public interface ProductOrdersService {
     ProductOrder confirmProductOrder(ProductOrder order);
 
     UserOrder addUserOrder(UserOrder userOrder);
+
+    UserOrder userOrderPaid(long id,String refID);
 }

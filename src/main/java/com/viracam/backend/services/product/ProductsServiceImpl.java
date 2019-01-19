@@ -85,7 +85,8 @@ public class ProductsServiceImpl implements ProductsService {
         ArrayList<ProductDTO> dtos = new ArrayList<ProductDTO>();
         ProductDTO dto = new ProductDTO();
         for (ProductImages image : product.getProductImages()) {
-            dto = new ProductDTO(product.getName(), image.getFilename(), product.getDescription(), product.getId(), product.getCost(), product.getProductProperties());
+            dto = new ProductDTO(product.getName(), image.getFilename(), product.getDescription(), product.getId(), product.getCost(), product.getProductProperties()
+                    ,product.getDiscountCondition(),product.getDiscount());
             break;
         }
         return dto;
@@ -148,11 +149,11 @@ public class ProductsServiceImpl implements ProductsService {
             Set<ProductProperties> properties = new HashSet<ProductProperties>();
             String filename = "";
             for (ProductImages image : product.getProductImages()) {
-                properties = propertiesRepository.findByProduct(product);
+                properties = product.getProductProperties() /*propertiesRepository.findByProduct(product)*/;
                 filename = image.getFilename();
                 break;
             }
-            dto = new ProductDTO(product.getName(), filename, product.getDescription(), product.getId(), product.getCost(), properties);
+            dto = new ProductDTO(product.getName(), filename, product.getDescription(), product.getId(), product.getCost(), properties,product.getDiscountCondition(),product.getDiscount());
             dtos.add(dto);
         }
         return dtos;

@@ -100,7 +100,7 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
                     "3.6mm Lens\n" +
                     "Fiberglass Case\n" +
                     "LED Hidden\n" +
-                    "UTC\n", Collections.EMPTY_LIST, "324P", Collections.EMPTY_SET, productCategory));
+                    "UTC\n", Collections.EMPTY_LIST, "324P", Collections.EMPTY_SET, productCategory,"10","1000"));
         }
         createProductImage(product);
 
@@ -111,7 +111,7 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
                     "2.8mm Lens\n" +
                     "Fiberglass Case\n" +
                     "LED Hidden\n" +
-                    "UTC\n", Collections.EMPTY_LIST, "D110", Collections.EMPTY_SET, productCategory));
+                    "UTC\n", Collections.EMPTY_LIST, "D110", Collections.EMPTY_SET, productCategory,"5","500"));
         }
         createProductImage(product);
 
@@ -122,7 +122,7 @@ public class DataInitialization implements ApplicationListener<ContextRefreshedE
                     "2.8mm Lens\n" +
                     "Fiberglass Case\n" +
                     "LED Hidden\n" +
-                    "UTC\n", Collections.EMPTY_LIST, "DC100VDM", Collections.EMPTY_SET, productCategory));
+                    "UTC\n", Collections.EMPTY_LIST, "DC100VDM", Collections.EMPTY_SET, productCategory,"0","0"));
         }
         createProductImage(product);
 

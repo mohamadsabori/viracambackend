@@ -32,6 +32,9 @@ public class StorageService {
             if(!Files.exists(Paths.get("upload-dir/" + productId))){
                 Files.createDirectory(Paths.get("upload-dir/" + productId));
             }
+            if(Files.exists(Paths.get("upload-dir/" + productId + "/" + file.getOriginalFilename()))){
+                Files.delete(Paths.get("upload-dir/" + productId + "/" + file.getOriginalFilename()));
+            }
             Files.copy(file.getInputStream(), this.rootLocation.resolve(productId + "/" + file.getOriginalFilename()));
         } catch (Exception e) {
             throw new RuntimeException("FAIL!");
