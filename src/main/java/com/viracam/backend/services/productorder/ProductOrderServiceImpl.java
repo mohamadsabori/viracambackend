@@ -84,6 +84,7 @@ public class ProductOrderServiceImpl implements ProductOrdersService {
             productOrderRepository.save(order);
         }
         userOrder.setTotalFactor(totalFactor);
+        if(userOrder.getShippingMethod() != null &&userOrder.getShippingMethod().getId() == 0) userOrder.setShippingMethod(null);
         return orderRepository.save(userOrder);
     }
 
@@ -98,12 +99,12 @@ public class ProductOrderServiceImpl implements ProductOrdersService {
         userOrder.setOrderStatus(orderStatus);
         userOrder.setOrderPayDate(DateUtil.getDate());
         userOrder.setOrderPayTime(String.valueOf(new Date().getTime()));
-        userOrder.setrefID(refID);
+        userOrder.setRefID(refID);
         for (ProductOrder order : userOrder.getOrderset()) {
             order.setOrderStatus(orderStatus);
             order.setOrderPayDate(DateUtil.getDate());
             order.setOrderPayTime(String.valueOf(new Date().getTime()));
-            order.setrefID(refID);;
+            order.setRefID(refID);;
             productOrderRepository.save(order);
         }
         return orderRepository.save(userOrder);

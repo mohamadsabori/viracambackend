@@ -196,10 +196,6 @@ public class UserOrder implements Serializable {
         return orderPayTime;
     }
 
-    public void setrefID(String refID) {
-        this.refID = refID;
-    }
-
     public String getRefID() {
         return refID;
     }
