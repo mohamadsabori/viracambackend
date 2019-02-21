@@ -56,6 +56,7 @@ public class ProductOrder implements Serializable {
                         @JsonProperty("orderPayDate")String orderPayDate,
                         @JsonProperty("refID")String refID
     ) {
+        System.out.println("ProductOrder initiated");
         this.id = id;
         this.product = product;
         this.user = user;

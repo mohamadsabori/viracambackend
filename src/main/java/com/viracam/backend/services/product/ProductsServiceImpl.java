@@ -126,7 +126,7 @@ public class ProductsServiceImpl implements ProductsService {
     @Override
     public ArrayList<ProductDTO> getAllProductsByCategoryType(long selectedCategory) {
         ProductCategory category = categoryRepository.findOne(selectedCategory);
-        Iterable<Product> products = repository.findByCategory(category);
+        Iterable<Product> products = repository.findByCategoryAndEnable(category,true);
         return createProductDTOS(products);
     }
 
@@ -148,8 +148,8 @@ public class ProductsServiceImpl implements ProductsService {
             ProductDTO dto = new ProductDTO();
             Set<ProductProperties> properties = new HashSet<ProductProperties>();
             String filename = "";
+            properties = product.getProductProperties() /*propertiesRepository.findByProduct(product)*/;
             for (ProductImages image : product.getProductImages()) {
-                properties = product.getProductProperties() /*propertiesRepository.findByProduct(product)*/;
                 filename = image.getFilename();
                 break;
             }

@@ -29,6 +29,12 @@ public class RequestFilter implements Filter {
 //        servletResponse.setHeader("Access-Control-Max-Age", "3600");
 //        servletResponse.setHeader("Access-Control-Allow-Credentials", "true");
 
+        try {
+            chain.doFilter(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+/*
         if (!servletRequest.getMethod().equalsIgnoreCase("OPTIONS")) {
             try {
                 chain.doFilter(request, response);
@@ -49,6 +55,7 @@ public class RequestFilter implements Filter {
             }
 
         }
+*/
     }
 
     @Override

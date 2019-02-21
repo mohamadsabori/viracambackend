@@ -10,6 +10,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface ProductRepository extends CrudRepository<Product,Long> {
     Product findByProductCode(String code);
 
-    Iterable<Product> findByCategory(ProductCategory category);
+    Iterable<Product> findByCategoryAndEnable(ProductCategory category,boolean enable);
     Iterable<Product> findByEnable(boolean enable);
 }

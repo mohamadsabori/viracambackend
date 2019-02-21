@@ -45,16 +45,17 @@ public class Product implements Serializable {
 
     @JsonCreator
     public Product(@JsonProperty("id") long id
-            ,@JsonProperty("name") String name
-            ,@JsonProperty("cost") String cost
-            ,@JsonProperty("description") String description
-            ,@JsonProperty("productCode") String productCode
-            ,@JsonProperty("productProperties") Set<ProductProperties> productProperties
-            ,@JsonProperty("category") ProductCategory category
-            ,@JsonProperty("enable") boolean enable
-            ,@JsonProperty("discountCondition") String discountCondition
-            ,@JsonProperty("discount") String discount
+                  ,@JsonProperty("name") String name
+                  ,@JsonProperty("cost") String cost
+                  ,@JsonProperty("description") String description
+                  ,@JsonProperty("productCode") String productCode
+                  ,@JsonProperty("productProperties") Set<ProductProperties> productProperties
+                  ,@JsonProperty("category") ProductCategory category
+                  ,@JsonProperty("enable") boolean enable
+                  ,@JsonProperty("discountCondition") String discountCondition
+                  ,@JsonProperty("discount") String discount
             ) {
+        System.out.println("Product initiated");
         this.id = id;
         this.name = name;
         this.cost = cost;

@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by Mohammad on 1/17/2018.
  */
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "productorder", produces = "application/hal+json;charset=UTF-8")
 public class ProductOrderController {
@@ -23,10 +25,23 @@ public class ProductOrderController {
 //        return service.registerNewOrder(productId, "09124850689");
     }
 
-    @RequestMapping(value = "/adduserorder", method = RequestMethod.POST)
-    @ResponseBody
-    public UserOrder addUserOrder(@RequestBody UserOrder userOrder) {
-        return service.addUserOrder(userOrder);
+    @PostMapping(value = "/adduserorder")
+    public @ResponseBody UserOrder addUserOrder(@RequestBody Map<String,String> map) {
+        System.out.println("Start adding order");
+//        UserOrder a = service.addUserOrder(userOrder);
+//        UserOrder a = new UserOrder();
+        System.out.println("End of adding order\t");
+        return new UserOrder();
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(value = "/adduserorder45")
+    public @ResponseBody UserOrder addUserOrder45(@RequestBody UserOrder userOrder) {
+        System.out.println("Start adding order");
+        UserOrder a = service.addUserOrder(userOrder);
+//        UserOrder a = new UserOrder();
+        System.out.println("End of adding order\t" + a.getId());
+        return a;
     }
 
     @RequestMapping(value = "/confirmProductOrder", method = RequestMethod.POST)

@@ -64,6 +64,7 @@ public class UserOrder implements Serializable {
             ,@JsonProperty("orderPayTime")String orderPayTime
             ,@JsonProperty("refID")String refID
     ) {
+        System.out.println("UserOrder initiated");
         this.id = id;
         this.orderset = orderset;
         this.userFullName = userFullName;

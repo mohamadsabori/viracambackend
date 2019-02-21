@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by msabori on 1/31/18.
  */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(value = "userorder", produces = "application/hal+json;charset=UTF-8")
 public class UserOrderController {
@@ -14,10 +15,13 @@ public class UserOrderController {
     @Autowired
     UserOrderService service;
 
-    @RequestMapping(value = "/loadallusers", method = RequestMethod.POST)
+    @RequestMapping(value = "/adduserorder", method = RequestMethod.PUT)
     @ResponseBody
     public UserOrder addUserOrder(@RequestBody UserOrder order){
-        return service.addUserOrder(order);
+        System.out.println("User order saved with id\t0");
+        UserOrder a = service.addUserOrder(order);
+        System.out.println("User order saved with id\t" + a.getId());
+        return a;
     }
 
     @RequestMapping(value = "/loaduserorders/{id}", method = RequestMethod.GET)
