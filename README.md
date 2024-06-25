@@ -49,7 +49,7 @@ GET /api/categories: Retrieve all categories.
 POST /api/categories: Add a new category.
 Request Body:
 json
-Copy code
+
 {
   "name": "Category Name",
   "description": "Category Description"
@@ -63,7 +63,7 @@ GET /api/products: Retrieve all products.
 POST /api/products: Add a new product.
 Request Body:
 json
-Copy code
+
 {
   "name": "Product Name",
   "price": 100.00,
@@ -79,7 +79,7 @@ GET /api/users: Retrieve all users.
 POST /api/users: Add a new user.
 Request Body:
 json
-Copy code
+
 {
   "username": "user123",
   "email": "user123@example.com",
@@ -93,7 +93,7 @@ GET /api/orders: Retrieve all orders.
 POST /api/orders: Place a new order.
 Request Body:
 json
-Copy code
+
 {
   "userId": 1,
   "productId": 1,
