@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8   # Use MySQL 8 which has ARM64 support
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: viracam_db
+      MYSQL_USER: viracam_user
+      MYSQL_PASSWORD: viracam_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: viracam-backend
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/viracam_db?useSSL=false&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: viracam_user
+      SPRING_DATASOURCE_PASSWORD: viracam_password
+
+volumes:
+  mysql_data:
+    driver: local
