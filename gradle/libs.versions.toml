@@ -11,7 +11,7 @@ org-mockito-mockito-core = "4.11.0"
 org-springframework-boot-spring-boot-starter = "1.5.6.RELEASE"
 org-springframework-boot-spring-boot-starter-data-jpa = "1.5.6.RELEASE"
 org-springframework-boot-spring-boot-starter-web = "1.5.6.RELEASE"
-org-webjars-bootstrap = "3.3.1"
+org-webjars-bootstrap = "5.0.0"
 org-webjars-webjars-locator = "0.32-1"
 
 [libraries]
